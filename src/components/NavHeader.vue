@@ -194,6 +194,7 @@ export default {
             border-top: 1px solid #e5e5e5;
             box-shadow: 0px 7px 6px 0px rgba($color: #000000, $alpha: 0.11);
             z-index: 10;
+            background: #ffffff;
             transition: all 0.5s;
             .product {
               position: relative;
