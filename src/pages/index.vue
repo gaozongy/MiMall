@@ -141,18 +141,19 @@ export default {
         &:hover {
           background-color: $colorA;
           .children {
-            display: block;
+            width: 962px;
+            border: 1px solid $colorH;
           }
         }
         .children {
-          display: none;
-          width: 962px;
+          width: 0;
           height: 450px;
+          box-sizing: border-box;
           background-color: $colorG;
           position: absolute;
           top: 0;
           left: 264px;
-          border: 1px solid $colorH;
+          transition: all 0.5s;
           ul {
             display: flex;
             justify-content: space-between;
