@@ -6,7 +6,16 @@
           <ul class="menu-wrap">
             <li class="menu-item">
               <a href="javascript:;">手机 电话卡</a>
-              <div class="children"></div>
+              <div class="children">
+                <ul v-for="(item, i) in productList" v-bind:key="i">
+                  <li v-for="(sub, j) in item" v-bind:key="j">
+                    <a v-bind:href="sub ? '/#/product/' + sub.id: ''">
+                      <img v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'" />
+                      <span>{{sub ? sub.name : "小米9"}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">电视 盒子</a>
@@ -102,6 +111,30 @@ export default {
           id: "",
           img: "/imgs/slider/slide-5.jpg"
         }
+      ],
+      productList: [
+        [
+          {
+            id: 30,
+            img: "/imgs/item-box-1.png",
+            name: "小米CC9"
+          },
+          {
+            id: 31,
+            img: "/imgs/item-box-2.png",
+            name: "小米8青春版"
+          },
+          {
+            id: 32,
+            img: "/imgs/item-box-3.jpg",
+            name: "Redmi K20 Pro"
+          },
+          {
+            id: 33,
+            img: "/imgs/item-box-4.jpg",
+            name: "移动4G专区"
+          }
+        ]
       ]
     };
   }
@@ -143,6 +176,10 @@ export default {
           .children {
             width: 962px;
             border: 1px solid $colorH;
+            span {
+              opacity: 1;
+              transition: opacity 2s;
+            }
           }
         }
         .children {
@@ -151,9 +188,10 @@ export default {
           box-sizing: border-box;
           background-color: $colorG;
           position: absolute;
+          overflow: hidden;
           top: 0;
           left: 264px;
-          transition: all 0.5s;
+          transition: width 0.5s;
           ul {
             display: flex;
             justify-content: space-between;
@@ -167,6 +205,10 @@ export default {
             a {
               color: $colorB;
               font-size: 14px;
+              span {
+                opacity: 0;
+                transition: opacity 0.2s;
+              }
             }
             img {
               width: 42px;
