@@ -52,17 +52,46 @@
         </swiper>
       </div>
       <div class="ads-box">
-        <a v-bind:href="'/#/product/' + item.id" v-for="(item, index) in adsList" v-bind:key="index">
-          <img v-bind:src="item.img"/>
+        <a
+          v-bind:href="'/#/product/' + item.id"
+          v-for="(item, index) in adsList"
+          v-bind:key="index"
+        >
+          <img v-bind:src="item.img" />
         </a>
       </div>
       <div class="banner">
         <a href="/#/product/30">
-          <img src="imgs/banner-1.png"/>
+          <img src="imgs/banner-1.png" />
         </a>
       </div>
-      <div class="product-box"></div>
     </div>
+      <div class="product-box">
+        <div class="container">
+          <h2>手机</h2>
+          <div class="wrapper">
+            <div class="banner-left">
+              <a href="/#/product/35">
+                <img src="/imgs/mix-alpha.jpg" />
+              </a>
+            </div>
+            <div class="list-box">
+              <div class="list" v-for="(item, i) in phoneList" v-bind:key="i">
+                <div class="item" v-for="(sub, j) in item" v-bind:key="j">
+                  <div class="item-img">
+                    <img v-bind:src="sub.mainImage" alt />
+                    <div class="item-info">
+                      <h3>{{sub.name}}</h3>
+                      <p>{{sub.subtitle}}</p>
+                      <p class="price">{{sub.price | currency}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <service-bar />
   </div>
 </template>
@@ -144,22 +173,49 @@ export default {
           }
         ]
       ],
-      adsList:[
-          {
-            id:33,
-            img:'/imgs/ads/ads-1.png'
-          },{
-            id:48,
-            img:'/imgs/ads/ads-2.jpg'
-          },{
-            id:45,
-            img:'/imgs/ads/ads-3.png'
-          },{
-            id:47,
-            img:'/imgs/ads/ads-4.jpg'
-          }
-        ]
+      adsList: [
+        {
+          id: 33,
+          img: "/imgs/ads/ads-1.png"
+        },
+        {
+          id: 48,
+          img: "/imgs/ads/ads-2.jpg"
+        },
+        {
+          id: 45,
+          img: "/imgs/ads/ads-3.png"
+        },
+        {
+          id: 47,
+          img: "/imgs/ads/ads-4.jpg"
+        }
+      ],
+      phoneList: []
     };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      this.axios
+        .get("/products", {
+          params: {
+            categoryId: 100012,
+            pageSize: 14
+          }
+        })
+        .then(res => {
+          this.phoneList = [res.list.slice(6, 10), res.list.slice(10, 14)];
+        });
+    }
+  },
+  filters: {
+    currency(val) {
+      if (!val) return "未知";
+      return val.toFixed(2) + "元起";
+    }
   }
 };
 </script>
@@ -183,7 +239,7 @@ export default {
         a {
           position: relative;
           display: block;
-          font-size: 16px;
+          font-size: 15px;
           color: #ffffff;
           padding-left: 30px;
           &:after {
@@ -256,15 +312,81 @@ export default {
   }
   .ads-box {
     @include flex();
-    margin-top:14px;
-    margin-bottom:30px;
+    margin-top: 14px;
+    margin-bottom: 30px;
     a {
       width: 296px;
       height: 168px;
     }
   }
   .banner {
-    margin-bottom:50px;
+    margin-bottom: 50px;
+  }
+  .product-box {
+    background-color: $colorJ;
+    padding: 30px 0 50px;
+    h2 {
+      font-size: $fontF;
+      height: 20px;
+      line-height: 20px;
+      color: $colorB;
+      margin-bottom: 20px;
+    }
+    .wrapper {
+      display: flex;
+      .banner-left {
+        margin-right: 16px;
+        img {
+          width: 224px;
+          height: 620px;
+        }
+      }
+      .list-box {
+        .list {
+          @include flex();
+          width: 986px;
+          margin-bottom: 16px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .item {
+            width: 236px;
+            height: 302px;
+            background-color: $colorG;
+            text-align: center;
+            padding: 20px 10px 15px;
+            box-sizing: border-box;
+            .item-img {
+              img {
+                height: 160px;
+                width: 160px;
+              }
+            }
+            .item-info {
+              h3 {
+                font-size: $fontJ;
+                color: $colorB;
+                line-height: $fontJ;
+                margin-top: 10px;
+              }
+              p {
+                color: #b0b0b0;
+                line-height: 12px;
+                margin: 6px auto 12px;
+                margin-top: 10px;
+              }
+              .price {
+                color: $colorA;
+                font-size: $fontJ;
+                font-weight: bold;
+                cursor: pointer;
+                margin-top: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>
