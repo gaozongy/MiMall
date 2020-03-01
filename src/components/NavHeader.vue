@@ -33,7 +33,7 @@
                 <li class="product" v-for="(item, index) in phoneList" :key="index">
                   <a v-bind:href="'/#/product/' + item.id" traget="_blank">
                     <div class="pro-img">
-                      <img :src="item.mainImage" :alt="item.subtitle" />
+                      <img v-lazy="item.mainImage" :alt="item.subtitle" />
                     </div>
                     <div class="pro-name">{{item.name}}</div>
                     <div class="pro-price">{{item.price | currency}}</div>

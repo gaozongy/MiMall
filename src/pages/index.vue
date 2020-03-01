@@ -10,7 +10,7 @@
                 <ul v-for="(item, i) in productList" v-bind:key="i">
                   <li v-for="(sub, j) in item" v-bind:key="j">
                     <a v-bind:href="sub ? '/#/product/' + sub.id: ''">
-                      <img v-bind:src="sub ? sub.img : '/imgs/item-box-1.png'" />
+                      <img v-lazy="sub.img" />
                       <span>{{sub ? sub.name : "小米9"}}</span>
                     </a>
                   </li>
@@ -43,7 +43,7 @@
         <swiper v-bind:options="swiperOption">
           <swiper-slide v-for="(item, index) in slideList" v-bind:key="index">
             <a v-bind:href="'/#/product/' + item.id">
-              <img v-bind:src="item.img" />
+              <img v-lazy="item.img" />
             </a>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination" />
@@ -57,12 +57,12 @@
           v-for="(item, index) in adsList"
           v-bind:key="index"
         >
-          <img v-bind:src="item.img" />
+          <img v-lazy="item.img" />
         </a>
       </div>
       <div class="banner">
         <a href="/#/product/30">
-          <img src="imgs/banner-1.png" />
+          <img v-lazy="'/imgs/banner-1.png'" />
         </a>
       </div>
     </div>
@@ -72,14 +72,14 @@
         <div class="wrapper">
           <div class="banner-left">
             <a href="/#/product/35">
-              <img src="/imgs/mix-alpha.jpg" />
+              <img v-lazy="'/imgs/mix-alpha.jpg'" />
             </a>
           </div>
           <div class="list-box">
             <div class="list" v-for="(item, i) in phoneList" v-bind:key="i">
               <div class="item" v-for="(sub, j) in item" v-bind:key="j">
                 <div class="item-img">
-                  <img v-bind:src="sub.mainImage" alt />
+                  <img v-lazy="sub.mainImage" alt />
                   <div class="item-info">
                     <h3>{{sub.name}}</h3>
                     <p>{{sub.subtitle}}</p>
@@ -207,7 +207,7 @@ export default {
         }
       ],
       phoneList: [],
-      showModal: true
+      showModal: false
     };
   },
   mounted() {
