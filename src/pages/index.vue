@@ -66,25 +66,24 @@
         </a>
       </div>
     </div>
-      <div class="product-box">
-        <div class="container">
-          <h2>手机</h2>
-          <div class="wrapper">
-            <div class="banner-left">
-              <a href="/#/product/35">
-                <img src="/imgs/mix-alpha.jpg" />
-              </a>
-            </div>
-            <div class="list-box">
-              <div class="list" v-for="(item, i) in phoneList" v-bind:key="i">
-                <div class="item" v-for="(sub, j) in item" v-bind:key="j">
-                  <div class="item-img">
-                    <img v-bind:src="sub.mainImage" alt />
-                    <div class="item-info">
-                      <h3>{{sub.name}}</h3>
-                      <p>{{sub.subtitle}}</p>
-                      <p class="price">{{sub.price | currency}}</p>
-                    </div>
+    <div class="product-box">
+      <div class="container">
+        <h2>手机</h2>
+        <div class="wrapper">
+          <div class="banner-left">
+            <a href="/#/product/35">
+              <img src="/imgs/mix-alpha.jpg" />
+            </a>
+          </div>
+          <div class="list-box">
+            <div class="list" v-for="(item, i) in phoneList" v-bind:key="i">
+              <div class="item" v-for="(sub, j) in item" v-bind:key="j">
+                <div class="item-img">
+                  <img v-bind:src="sub.mainImage" alt />
+                  <div class="item-info">
+                    <h3>{{sub.name}}</h3>
+                    <p>{{sub.subtitle}}</p>
+                    <p class="price">{{sub.price | currency}}</p>
                   </div>
                 </div>
               </div>
@@ -92,19 +91,35 @@
           </div>
         </div>
       </div>
+    </div>
     <service-bar />
+    <modal
+      title="提示"
+      sureText="查看购物车"
+      btnType="3"
+      modalType="middle"
+      v-bind:showModal="showModal"
+      v-on:submit="showModal=false"
+      v-on:cancel="showModal=false"
+    >
+      <template v-slot:body>
+        <p>商品添加成功</p>
+      </template>
+    </modal>
   </div>
 </template>
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 import ServiceBar from "./../components/ServiceBar";
+import Modal from "./../components/Modal";
 export default {
   name: "index",
   components: {
     swiper,
     swiperSlide,
-    ServiceBar
+    ServiceBar,
+    Modal
   },
   data() {
     return {
@@ -191,7 +206,8 @@ export default {
           img: "/imgs/ads/ads-4.jpg"
         }
       ],
-      phoneList: []
+      phoneList: [],
+      showModal: true
     };
   },
   mounted() {
