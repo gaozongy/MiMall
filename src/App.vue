@@ -6,11 +6,22 @@
 
 <script>
 export default {
-  name: "App"
+  name: "app",
+  mounted() {
+    this.getUser();
+    this.getCartCount();
+  },
+  methods: {
+    getUser() {
+      this.axios.get("/user").then(() => {});
+    },
+    getCartCount() {
+      this.axios.get("/carts/products/sum").then(() => {});
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 @import "./assets/scss/reset.scss";
-
 </style>

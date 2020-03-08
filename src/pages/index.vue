@@ -43,7 +43,7 @@
         <swiper v-bind:options="swiperOption">
           <swiper-slide v-for="(item, index) in slideList" v-bind:key="index">
             <a v-bind:href="'/#/product/' + item.id">
-              <img v-lazy="item.img" />
+              <img v-bind:src="item.img" />
             </a>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination" />
