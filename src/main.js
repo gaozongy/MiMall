@@ -26,7 +26,7 @@ axios.interceptors.response.use(function(response) {
 Vue.use(VueAxios, axios);
 Vue.use(VueCookie);
 Vue.use(VueLazyLoad, {
-  loading: "/imgs/loading-svg/loading-spinning-bubbles.svg"
+  loading: "/imgs/loading-bg/grey.png"
 });
 Vue.config.productionTip = false;
 
