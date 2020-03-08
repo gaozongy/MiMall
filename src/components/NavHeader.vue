@@ -119,7 +119,10 @@ export default {
       a {
         display: inline-block;
         color: #b0b0b0;
-        margin-right: 17px;
+        margin-right: 16px;
+        &:last-child {
+          margin-right: 0;
+        }
       }
       .my-cart {
         width: 110px;
