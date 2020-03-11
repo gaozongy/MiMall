@@ -72,6 +72,7 @@ export default {
         })
         .then(response => {
           this.$cookie.set("userId", response.id, { expires: "1M" });
+          this.$store.dispatch("saveUserName", response.username);
           this.$router.push("/index");
         });
     },

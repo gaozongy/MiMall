@@ -13,10 +13,14 @@ export default {
   },
   methods: {
     getUser() {
-      this.axios.get("/user").then(() => {});
+      this.axios.get("/user").then(response => {
+        this.$store.dispatch("saveUserName", response.username);
+      });
     },
     getCartCount() {
-      this.axios.get("/carts/products/sum").then(() => {});
+      this.axios.get("/carts/products/sum").then(response => {
+        this.$store.dispatch("saveCartCount", response);
+      });
     }
   }
 };

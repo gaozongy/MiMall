@@ -4,6 +4,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import VueLazyLoad from "vue-lazyload";
 import VueCookie from "vue-cookie";
+import store from "./store";
 import App from "./App.vue";
 // import env from "./env";
 
@@ -22,8 +23,8 @@ axios.interceptors.response.use(function(response) {
     }
   } else {
     alert(res.msg);
-    return Promise.reject(res);
   }
+  return Promise.reject(res);
 });
 
 Vue.use(VueAxios, axios);
@@ -35,5 +36,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");
