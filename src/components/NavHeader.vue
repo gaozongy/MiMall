@@ -118,8 +118,8 @@ export default {
 @import "./../assets/scss/config.scss";
 .header {
   .nav-topbar {
-    height: 39px;
-    line-height: 39px;
+    height: 40px;
+    line-height: 40px;
     background-color: #333333;
     color: #b0b0b0;
     .container {
@@ -147,7 +147,7 @@ export default {
   .nav-header {
     .container {
       position: relative;
-      height: 112px;
+      height: 100px;
       @include flex();
       .header-logo {
         display: inline-block;
