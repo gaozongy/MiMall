@@ -58,8 +58,8 @@
           <br />更能AI 精准分析视频内容，15个场景智能匹配背景音效。
         </p>
         <div class="video-bg" v-on:click="showVideo=true"></div>
-        <div class="video-box" v-show="showVideo">
-          <div class="overlay"></div>
+        <div class="video-box">
+          <div class="overlay" v-show="showVideo"></div>
           <div class="video" v-bind:class="{'slide':showVideo}">
             <span class="icon-close" v-on:click="showVideo=false"></span>
             <video src="/imgs/product/video.mp4" muted autoplay controls="controls"></video>
@@ -126,10 +126,12 @@ export default {
       h2 {
         font-size: 80px;
         padding-top: 55px;
+        font-weight: normal;
       }
       h3 {
         font-size: 24px;
         letter-spacing: 10px;
+        font-weight: normal;
       }
       p {
         margin-top: 20px;
@@ -137,6 +139,7 @@ export default {
         a {
           font-size: 16px;
           color: #333333;
+          font-weight: normal;
         }
         span {
           margin: 0 15px;
@@ -145,6 +148,7 @@ export default {
       .price {
         font-size: 30px;
         color: #333333;
+        font-weight: normal;
         em {
           font-style: normal;
           font-size: 38px;
@@ -165,8 +169,6 @@ export default {
       margin: 36px auto 40px;
       p {
         margin-top: 15px;
-      }
-      .desc {
         font-size: 18px;
         color: #333333;
         text-align: center;

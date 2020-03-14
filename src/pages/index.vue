@@ -60,14 +60,92 @@
           <img v-lazy="item.img" />
         </a>
       </div>
-      <div class="banner">
-        <a href="/#/product/30">
-          <img v-lazy="'/imgs/banner-1.png'" />
-        </a>
-      </div>
     </div>
     <div class="product-box">
       <div class="container">
+        <div class="flashsale">
+          <div>
+            <h2 class="flashsale-title">小米闪购</h2>
+            <div class="swiper-flashsale-controls">
+              <span class="swiper-flashsale-prev" />
+              <span class="swiper-flashsale-next" />
+            </div>
+          </div>
+          <div class="flashsale-body clearfix">
+            <div class="countdown">
+              <p class="time">14:20 场</p>
+              <img src="/imgs/flashsale.png" alt />
+              <p class="tip">距离结束还有</p>
+              <p>
+                <span class="hour">00</span>
+                <i>:</i>
+                <span class="minute">54</span>
+                <i>:</i>
+                <span class="second">46</span>
+              </p>
+            </div>
+            <div class="flashsale-list clearfix">
+              <swiper v-bind:options="flashsaleSwiperOption">
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-2.png" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-3.png" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-4.png" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-5.jpg" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-6.jpg" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-2.png" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-3.png" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-4.png" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-5.jpg" alt />
+                  </div>
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="flashsale-item">
+                    <img src="/imgs/product/gallery-6.jpg" alt />
+                  </div>
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+              </swiper>
+            </div>
+          </div>
+        </div>
+        <div class="banner">
+          <a href="/#/product/30">
+            <img v-lazy="'/imgs/banner-1.png'" />
+          </a>
+        </div>
         <h2>手机</h2>
         <div class="wrapper">
           <div class="banner-left">
@@ -140,6 +218,18 @@ export default {
         navigation: {
           prevEl: ".swiper-button-prev",
           nextEl: ".swiper-button-next"
+        }
+      },
+      flashsaleSwiperOption: {
+        autoplay: {
+          delay: 5000
+        },
+        loop: true,
+        slidesPerView: 4,
+        spaceBetween: 14,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
         }
       },
       slideList: [
@@ -335,12 +425,86 @@ export default {
       height: 168px;
     }
   }
-  .banner {
-    margin-bottom: 50px;
-  }
   .product-box {
     background-color: $colorJ;
     padding: 30px 0 50px;
+    .flashsale {
+      position: relative;
+      .swiper-flashsale-controls {
+        position: absolute;
+        top: 0;
+        right: 0;
+        .swiper-flashsale-prev,
+        .swiper-flashsale-next {
+          width: 35px;
+          height: 25px;
+          border: 1px solid #e0e0e0;
+          display: inline-block;
+        }
+      }
+      .flashsale-body {
+        .countdown {
+          width: 234px;
+          height: 340px;
+          border-top: 1px solid #e53935;
+          text-align: center;
+          background: #f1eded;
+          float: left;
+          .time {
+            font-size: 20px;
+            color: #ef3a3b;
+            margin-top: 55px;
+            font-weight: normal;
+          }
+          img {
+            margin: 25px;
+            overflow: hidden;
+          }
+          .tip {
+            font-size: 15px;
+            color: rgb(0, 0, 54);
+            margin-bottom: 28px;
+          }
+          span {
+            width: 46px;
+            height: 46px;
+            line-height: 46px;
+            font-size: 24px;
+            background: #605751;
+            color: #ffffff;
+            text-align: center;
+            display: inline-block;
+          }
+          i {
+            width: 15px;
+            height: 46px;
+            line-height: 46px;
+            color: #605751;
+            font-size: 28px;
+            font-style: normal;
+            margin: 0 2px;
+          }
+        }
+        .flashsale-list {
+          width: 978px;
+          float: left;
+          margin-left: 14px;
+          .flashsale-item {
+            width: 234px;
+            height: 340px;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    .banner {
+      margin-top: 25px;
+      margin-bottom: 50px;
+    }
     h2 {
       font-size: $fontF;
       height: 20px;
@@ -351,22 +515,22 @@ export default {
     .wrapper {
       display: flex;
       .banner-left {
-        margin-right: 16px;
+        margin-right: 14px;
         img {
-          width: 224px;
+          width: 234px;
           height: 620px;
         }
       }
       .list-box {
         .list {
           @include flex();
-          width: 986px;
+          width: 978px;
           margin-bottom: 16px;
           &:last-child {
             margin-bottom: 0;
           }
           .item {
-            width: 236px;
+            width: 234px;
             height: 302px;
             background-color: $colorG;
             text-align: center;
@@ -394,7 +558,7 @@ export default {
               .price {
                 color: $colorA;
                 font-size: $fontJ;
-                font-weight: bold;
+                font-weight: normal;
                 cursor: pointer;
                 margin-top: 18px;
               }
