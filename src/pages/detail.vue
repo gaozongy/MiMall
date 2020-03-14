@@ -229,12 +229,15 @@ export default {
           border: 1px solid #e5e5e5;
           box-sizing: border-box;
           text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
           .color {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             background-color: #666666;
+            margin-right: 10px;
           }
           &.checked {
             border: 1px solid #ff6600;
