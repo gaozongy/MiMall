@@ -175,14 +175,14 @@ export default {
       }
       .header-menu {
         display: inline-block;
-        width: 643px;
-        padding-left: 209px;
+        width: 650px;
+        padding-left: 210px;
         .item-menu {
           display: inline-block;
           color: #333333;
           font-weight: bold;
           font-size: 16px;
-          line-height: 112px;
+          line-height: 100px;
           margin-right: 20px;
           span {
             cursor: pointer;
@@ -196,7 +196,7 @@ export default {
           }
           .children {
             position: absolute;
-            top: 112px;
+            top: 100px;
             left: 0;
             width: 1226px;
             height: 0;
