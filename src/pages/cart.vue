@@ -68,6 +68,8 @@
 import OrderHeader from "./../components/OrderHeader";
 import ServiceBar from "./../components/ServiceBar";
 import NavFooter from "./../components/NavFooter";
+import { Message } from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
 export default {
   name: "cart",
   components: {
@@ -97,13 +99,13 @@ export default {
         selected = item.productSelected;
       if (type == "-") {
         if (quantity == 1) {
-          alert("商品至少保留一件");
+          Message.warning("商品至少保留一件");
           return;
         }
         --quantity;
       } else if (type == "+") {
         if (quantity > item.productStock) {
-          alert("购买数量不能超过库存数量");
+          Message.warning("购买数量不能超过库存数量");
           return;
         }
         ++quantity;
@@ -121,6 +123,7 @@ export default {
     },
     delProduct(item) {
       this.axios.delete(`/carts/${item.productId}`).then(res => {
+        Message.success("删除成功");
         this.renderData(res);
       });
     },
@@ -141,7 +144,7 @@ export default {
       if (hasSelected) {
         this.$router.push("/order/confirm");
       } else {
-        alert("请选择一件商品");
+        Message.warning("请选择一件商品");
       }
     }
   }

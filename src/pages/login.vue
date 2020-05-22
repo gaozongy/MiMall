@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { Message } from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
 export default {
   name: "login",
   data() {
@@ -84,7 +86,7 @@ export default {
           email: "admin@163.com"
         })
         .then(() => {
-          alert("注册成功");
+          Message.success("注册成功");
         });
     }
   }
