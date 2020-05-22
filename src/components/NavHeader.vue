@@ -114,7 +114,7 @@ export default {
         });
     },
     getCartCount() {
-      this.axios.get("/carts/products/sum").then((res = 0) => {
+      this.axios.get("/carts/products/sum").then((res) => {
         this.$store.dispatch("saveCartCount", res);
       });
     },
@@ -123,7 +123,7 @@ export default {
         Message.success("退出成功");
         this.$cookie.set("userId", "", { expires: "-1" });
         this.$store.dispatch("saveUserName", "");
-        this.$store.dispatch("saveCartCount", "0");
+        this.$store.dispatch("saveCartCount", 0);
       });
     },
     goToCart() {
