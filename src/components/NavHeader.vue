@@ -12,6 +12,7 @@
         <div class="topbar-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
+          <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="javascript:;" v-if="username">我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart">
             <span class="icon-cart" />
@@ -64,6 +65,8 @@
 </template>
 
 <script>
+import { Message } from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
 export default {
   name: "nav-header",
   data() {
@@ -87,6 +90,10 @@ export default {
   },
   mounted() {
     this.getProductList();
+    let params = this.$route.params;
+    if (params && params.from == "login") {
+      this.getCartCount();
+    }
   },
   methods: {
     login() {
@@ -105,6 +112,19 @@ export default {
             this.phoneList = res.list.slice(0, 6);
           }
         });
+    },
+    getCartCount() {
+      this.axios.get("/carts/products/sum").then((res = 0) => {
+        this.$store.dispatch("saveCartCount", res);
+      });
+    },
+    logout() {
+      this.axios.post("/user/logout").then(() => {
+        Message.success("退出成功");
+        this.$cookie.set("userId", "", { expires: "-1" });
+        this.$store.dispatch("saveUserName", "");
+        this.$store.dispatch("saveCartCount", "0");
+      });
     },
     goToCart() {
       this.$router.push("/cart");

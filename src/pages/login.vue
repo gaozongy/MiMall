@@ -72,10 +72,15 @@ export default {
           username,
           password
         })
-        .then(response => {
-          this.$cookie.set("userId", response.id, { expires: "1M" });
-          this.$store.dispatch("saveUserName", response.username);
-          this.$router.push("/index");
+        .then(res => {
+          this.$cookie.set("userId", res.id, { expires: "Session" });
+          this.$store.dispatch("saveUserName", res.username);
+          this.$router.push({
+            name: "index",
+            params: {
+              from: "login"
+            }
+          });
         });
     },
     register() {
