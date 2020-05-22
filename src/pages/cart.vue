@@ -48,8 +48,8 @@
           <div class="cart-tip fl">
             <a href="/#/index">继续购物</a>
             共
-            <span>{{list.length}}</span>件商品，已选择
-            <span>{{checkedNum}}</span>件
+            <span>{{allNum}}</span>件商品，已选择
+            <span>{{selectedNum}}</span>件
           </div>
           <div class="total fr">
             合计:
@@ -82,7 +82,8 @@ export default {
       list: [],
       allChecked: false,
       cartTotalPrice: 0,
-      checkedNum: 0
+      allNum: 0,
+      selectedNum: 0
     };
   },
   mounted() {
@@ -137,7 +138,14 @@ export default {
       this.list = res.cartProductVoList || [];
       this.allChecked = res.selectedAll;
       this.cartTotalPrice = res.cartTotalPrice;
-      this.checkedNum = this.list.filter(item => item.productSelected).length;
+      this.allNum = 0;
+      this.selectedNum = 0;
+      this.list.map(item => {
+        this.allNum += item.quantity;
+        if (item.productSelected) {
+          this.selectedNum += item.quantity;
+        }
+      });
     },
     order() {
       let hasSelected = this.list.some(item => item.productSelected);

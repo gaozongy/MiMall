@@ -84,11 +84,12 @@ export default {
         });
     },
     register() {
+      let { username, password } = this;
       this.axios
         .post("/user/register", {
-          username: "admin1",
-          password: "admin1",
-          email: "admin@163.com"
+          username,
+          password,
+          email: username + "@163.com"
         })
         .then(() => {
           Message.success("注册成功");

@@ -35,6 +35,7 @@ export default {
 @import "./../assets/scss/mixin.scss";
 .order-header {
   padding: 30px 0;
+  border-bottom: 2px solid #ff6600;
   .header-logo {
     float: left;
     width: 55px;
