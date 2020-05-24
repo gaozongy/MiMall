@@ -79,7 +79,7 @@
               </div>
             </div>
           </div>
-          <div class="item good">
+          <div class="item-good">
             <h2>商品</h2>
             <ul>
               <li v-for="(item, index) in cartList" v-bind:key="index">
@@ -118,7 +118,7 @@
               <span class="item-name">运费：</span>
               <span class="item-val">0元</span>
             </div>
-            <div class="item">
+            <div class="item-total">
               <span class="item-name">应付总额：</span>
               <span class="item-val">{{cartTotalPrice}}元</span>
             </div>
@@ -138,35 +138,37 @@
       @submit="submitAddress"
     >
       <template v-slot:body>
-        <div class="item">
-          <input type="text" class="input" placeholder="姓名" v-model="checkedItem.receiverName" />
-          <input type="text" class="input" placeholder="手机号" v-model="checkedItem.receiverMobile" />
-        </div>
-        <div class="item">
-          <select name="province" v-model="checkedItem.receiverProvince">
-            <option value="北京">北京</option>
-            <option value="天津">天津</option>
-            <option value="河北">河北</option>
-          </select>
-          <select name="city" v-model="checkedItem.receiverCity">
-            <option value="北京">北京</option>
-            <option value="天津">天津</option>
-            <option value="河北">河北</option>
-          </select>
-          <select name="district" v-model="checkedItem.receiverDistrict">
-            <option value="昌平区">昌平区</option>
-            <option value="海淀区">海淀区</option>
-            <option value="东城区">东城区</option>
-            <option value="西城区">西城区</option>
-            <option value="顺义区">顺义区</option>
-            <option value="房山区">房山区</option>
-          </select>
-        </div>
-        <div class="item">
-          <textarea name="street" v-model="checkedItem.receiverAddress"></textarea>
-        </div>
-        <div class="item">
-          <input type="text" class="input" placeholder="邮编" v-model="checkedItem.receiverZip" />
+        <div class="edit-wrap">
+          <div class="item">
+            <input type="text" class="input" placeholder="姓名" v-model="checkedItem.receiverName" />
+            <input type="text" class="input" placeholder="手机号" v-model="checkedItem.receiverMobile" />
+          </div>
+          <div class="item">
+            <select name="province" v-model="checkedItem.receiverProvince">
+              <option value="北京">北京</option>
+              <option value="天津">天津</option>
+              <option value="河北">河北</option>
+            </select>
+            <select name="city" v-model="checkedItem.receiverCity">
+              <option value="北京">北京</option>
+              <option value="天津">天津</option>
+              <option value="河北">河北</option>
+            </select>
+            <select name="district" v-model="checkedItem.receiverDistrict">
+              <option value="昌平区">昌平区</option>
+              <option value="海淀区">海淀区</option>
+              <option value="东城区">东城区</option>
+              <option value="西城区">西城区</option>
+              <option value="顺义区">顺义区</option>
+              <option value="房山区">房山区</option>
+            </select>
+          </div>
+          <div class="item">
+            <textarea name="street" placeholder="详细地址" v-model="checkedItem.receiverAddress"></textarea>
+          </div>
+          <div class="item">
+            <input type="text" class="input" placeholder="邮编" v-model="checkedItem.receiverZip" />
+          </div>
         </div>
       </template>
     </modal>
@@ -265,7 +267,7 @@ export default {
           receiverAddress,
           receiverZip
         } = checkedItem;
-        let errMsg = "";
+        let errMsg;
         if (!receiverName) {
           errMsg = "请输入收货人姓名";
         } else if (!/\d{11}/.test(receiverMobile)) {
@@ -330,4 +332,192 @@ export default {
 };
 </script>
 <style lang="scss">
+.order-confirm {
+  .wrapper {
+    background-color: #f5f5f5;
+    padding-top: 30px;
+    padding-bottom: 80px;
+    .order-box {
+      background-color: #ffffff;
+      padding-left: 40px;
+      padding-bottom: 40px;
+      .item-address {
+        padding-top: 40px;
+        .addr-title {
+          font-size: 20px;
+          color: #333333;
+          font-weight: 200;
+          margin-bottom: 20px;
+        }
+        .addr-list {
+          .addr-info,
+          .addr-add {
+            box-sizing: border-box;
+            float: left;
+            width: 270px;
+            height: 180px;
+            border: 1px solid #e5e5e5;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            padding: 15px 25px;
+            font-size: 14px;
+            color: #757575;
+          }
+          .addr-info {
+            cursor: pointer;
+            h2 {
+              height: 26px;
+              font-size: 18px;
+              font-weight: 300;
+              color: #333333;
+              margin-bottom: 10px;
+            }
+            .street {
+              height: 50px;
+            }
+            .action {
+              height: 50px;
+              line-height: 50px;
+              .icon {
+                width: 20px;
+                height: 20px;
+                fill: #666666;
+                vertical-align: middle;
+                &:hover {
+                  fill: #ff6700;
+                }
+              }
+            }
+            &.checked {
+              border: 1px solid #ff6700;
+            }
+          }
+          .addr-add {
+            text-align: center;
+            color: #999999;
+            cursor: pointer;
+            .icon-add {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              background: url("/imgs/icon-add.png") #e0e0e0 no-repeat center;
+              background-size: 14px;
+              margin: 0 auto;
+              margin-top: 45px;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+      .item-good {
+        margin-right: 40px;
+        margin-top: 35px;
+        border-bottom: 1px solid #e5e5e5;
+        padding-bottom: 12px;
+        h2 {
+          border-bottom: 1px solid #e5e5e5;
+          padding-bottom: 5px;
+        }
+        li {
+          display: flex;
+          align-items: center;
+          height: 40px;
+          line-height: 40px;
+          margin-top: 10px;
+          font-size: 16px;
+          color: #333333;
+          .good-name {
+            flex: 5;
+            img {
+              width: 30px;
+              height: 30px;
+              vertical-align: middle;
+            }
+          }
+          .good-price {
+            flex: 2;
+          }
+          .good-total {
+            padding-right: 45px;
+            color: #ff6600;
+          }
+        }
+      }
+      .item-shipping,
+      .item-invoice {
+        margin-top: 30px;
+        line-height: 20px;
+        h2 {
+          display: inline-block;
+          margin-right: 70px;
+          font-size: 20px;
+          width: 80px;
+        }
+        span,
+        a {
+          font-size: 16px;
+          color: #ff6600;
+          margin-right: 22px;
+        }
+      }
+      .detail {
+        margin: 50px 40px 30px 0;
+        border-bottom: 1px solid #f5f5f5;
+        text-align: right;
+        font-size: 16px;
+        color: #666666;
+        .item {
+          line-height: 15px;
+          margin-bottom: 12px;
+          .item-val {
+            display: inline-block;
+            width: 100px;
+            color: #ff6600;
+          }
+        }
+        .item-total {
+          .item-val {
+            font-size: 28px;
+            color: #ff6600;
+          }
+        }
+      }
+      .btn-group {
+        margin-top: 36px;
+        text-align: right;
+        margin-right: 40px;
+      }
+    }
+  }
+  .edit-wrap {
+    font-size: 14px;
+    .item {
+      margin-bottom: 15px;
+      .input {
+        display: inline-block;
+        width: 280px;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 15px;
+        border: 1px solid #e5e5e5;
+        & + .input {
+          margin-left: 20px;
+        }
+      }
+      select {
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #e5e5e5;
+        margin-right: 15px;
+      }
+      textarea {
+        height: 60px;
+        width: 100%;
+        padding: 12px 15px;
+        box-sizing: border-box;
+        border: 1px solid #e5e5e5;
+      }
+    }
+  }
+}
 </style>
