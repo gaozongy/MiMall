@@ -94,7 +94,7 @@
           </div>
           <div class="item-shipping">
             <h2>配送方式</h2>
-            <span>包邮</span>
+            <a href="javascript:;">包邮</a>
           </div>
           <div class="item-invoice">
             <h2>发票</h2>
@@ -323,7 +323,7 @@ export default {
           this.$router.push({
             path: "/order/pay",
             query: {
-              orderNo: res.orderNo
+              orderId: res.orderNo
             }
           });
         });
