@@ -42,6 +42,11 @@
         </symbol>
       </defs>
     </svg>
+    <order-header title="订单确认">
+      <template v-slot:tip>
+        <span>请认真填写收货地址</span>
+      </template>
+    </order-header>
     <div class="wrapper">
       <div class="container">
         <div class="order-box">
@@ -188,10 +193,12 @@
 <script>
 import { Message } from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import OrderHeader from "./../components/OrderHeader";
 import Modal from "./../components/Modal";
 export default {
   name: "order-confirm",
   components: {
+    OrderHeader,
     Modal
   },
   data() {
